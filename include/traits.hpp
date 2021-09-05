@@ -1,5 +1,5 @@
 #ifndef CPP_UTILS_TRAITS_HPP
-#define CPP_UTILS_TAITS_HPP
+#define CPP_UTILS_TRAITS_HPP
 
 #include <type_traits>
 
