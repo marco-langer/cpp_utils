@@ -36,12 +36,22 @@ suite strings = [] {
   using namespace ml::string;
 
   "from_u8"_test = [] {
-    constexpr auto u8_literal = u8"Hello World on chinese: 世界您好";
+    constexpr auto u8_literal = u8"'Hello World' in chinese: 世界您好";
     const std::u8string str1{u8_literal};
     expect(from_u8(str1) == reinterpret_cast<const char *>(u8_literal));
     expect(from_u8(u8_literal) == reinterpret_cast<const char *>(u8_literal));
     expect(std::is_same_v<std::string, decltype(from_u8(std::declval<std::u8string>()))>);
     expect(std::is_same_v<std::string, decltype(from_u8(std::declval<std::u8string&>()))>);
+  };
+};
+
+suite literals = [] {
+  using namespace ml::literals;
+
+  "operator_uz"_test = [] {
+    constexpr auto value = 42_uz;
+    expect(value == 42_u);
+    expect(std::is_same_v<std::size_t, decltype(42_uz)>);
   };
 };
 
