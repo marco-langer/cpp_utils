@@ -13,15 +13,22 @@ from_u8(const std::u8string & str) {
 }
 
 /* exclude r-value strings to prevent lifetime issues */
-// TODO is this correct for all edge cases?
-template <typename T = std::u8string_view>
+// TODO (1) is this correct for all edge cases ?
+// TODO (2) can we simplify this ?
+template <typename T>
 requires(
-  std::is_same_v<T, std::u8string_view>
-  || !std::is_rvalue_reference_v<T>
+  std::is_same_v<std::remove_cvref_t<T>, std::u8string_view>
+  || !std::is_rvalue_reference_v<T&&>
 )
 std::string_view
-view_from_u8(std::u8string_view && value) {
-  return std::string_view(reinterpret_cast<const char *>(value.data()), value.size());
+view_from_u8(T && value) {
+  if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::u8string_view>) {
+    return std::string_view{reinterpret_cast<const char *>(value.data()), value.size()};
+  } else if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::u8string>) {
+    return std::string_view{reinterpret_cast<const char *>(value.c_str()), value.size()};
+  } else {
+    return std::string_view{reinterpret_cast<const char *>(value)};
+  }
 }
 
 } // namespace ml::string
