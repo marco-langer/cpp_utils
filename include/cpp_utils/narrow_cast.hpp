@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <concepts>
 #include <exception>
+#include <limits>
 
 /* inspired by Microsoft's gls library, but with a different implementation:
  *
@@ -29,7 +30,7 @@ T
 narrow_cast_s(U u) noexcept(false)
 {
   constexpr const bool is_different_signedness =
-    (std::is_signed<T>::value != std::is_signed<U>::value);
+    (std::numeric_limits<T>::is_signed != std::numeric_limits<U>::is_signed);
 
   const T t = static_cast<T>(u);
   if (static_cast<U>(t) != u || (is_different_signedness && ((t < T{}) != (u < U{}))))
