@@ -1,5 +1,5 @@
-#ifndef CPP_UTILS_TRAITS_HPP
-#define CPP_UTILS_TRAITS_HPP
+#ifndef CPP_UTILS_TRAITS_HPP_INCLUDE
+#define CPP_UTILS_TRAITS_HPP_INCLUDE
 
 #include <type_traits>
 
@@ -39,4 +39,4 @@ inline constexpr bool is_standard_arithmetic_v =
 
 } // namespace ml
 
-#endif 
+#endif

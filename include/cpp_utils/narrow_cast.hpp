@@ -1,5 +1,5 @@
-#ifndef CPP_UTILS_NARROW_CAST_HPP
-#define CPP_UTILS_NARROW_CAST_HPP
+#ifndef CPP_UTILS_NARROW_CAST_HPP_INCLUDE
+#define CPP_UTILS_NARROW_CAST_HPP_INCLUDE
 
 #include <cstdint>
 #include <concepts>
@@ -9,7 +9,7 @@
 /* inspired by Microsoft's gls library, but with a different implementation:
  *
  *   - narrow_cast_s   throws on narrowing error
- *   - narrow_cast     throws in debug build on narrowing error, and falls back to 
+ *   - narrow_cast     throws in debug build on narrowing error, and falls back to
  *                     unchecked static_cast in release build.
  */
 
@@ -25,7 +25,7 @@ struct narrowing_error : public std::exception
 };
 
 template <std::integral T, std::integral U>
-[[nodiscard]] constexpr 
+[[nodiscard]] constexpr
 T
 narrow_cast_s(U u) noexcept(false)
 {
@@ -41,7 +41,7 @@ narrow_cast_s(U u) noexcept(false)
 }
 
 template <std::integral T, std::integral U>
-[[nodiscard]] constexpr 
+[[nodiscard]] constexpr
 T
 narrow_cast(U u) noexcept(false)
 {

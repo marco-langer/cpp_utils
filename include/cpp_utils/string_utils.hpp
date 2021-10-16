@@ -1,5 +1,5 @@
-#ifndef CPP_UTILS_STRING_HPP
-#define CPP_UTILS_STRING_HPP
+#ifndef CPP_UTILS_STRING_HPP_INCLUDE
+#define CPP_UTILS_STRING_HPP_INCLUDE
 
 #include <string>
 #include <string_view>
@@ -7,7 +7,7 @@
 
 namespace ml::string {
 
-std::string
+inline std::string
 from_u8(const std::u8string & str) {
   return std::string{str.cbegin(), str.cend()};
 }
