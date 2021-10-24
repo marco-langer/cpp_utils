@@ -5,10 +5,10 @@
 
 namespace ml {
 
-template <typename T, bool B>
+template <bool B, typename T = void>
 using disable_if = std::enable_if<!B, T>;
 
-template <typename T, bool B>
+template <bool B, typename T = void>
 using disable_if_t = typename disable_if<T, B>::type;
 
 template <typename... T>
