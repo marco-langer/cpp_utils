@@ -9,7 +9,7 @@ template <bool B, typename T = void>
 using disable_if = std::enable_if<!B, T>;
 
 template <bool B, typename T = void>
-using disable_if_t = typename disable_if<T, B>::type;
+using disable_if_t = typename disable_if<B, T>::type;
 
 template <typename... T>
 inline constexpr bool dependent_false = false;
