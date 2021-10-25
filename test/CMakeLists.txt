@@ -18,12 +18,12 @@ set_property(TARGET ${TEST_NAME} PROPERTY CXX_EXTENSIONS OFF)
 target_compile_options(${TEST_NAME} PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
         -Wall -Wextra -Werror -Wpedantic -Wundef -Wpointer-arith -Wno-long-long
-        -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused 
+        -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused
         -Woverloaded-virtual -Wconversion -Wsign-conversion -Wdouble-promotion
-        -Wformat=2 -Wduplicated-cond -Wduplicated-branches 
+        -Wformat=2 -Wduplicated-cond -Wduplicated-branches
         -Wlogical-op -Wuseless-cast>
     $<$<CXX_COMPILER_ID:MSVC>:
-        /W4 /WE>)
+        /W4 /WX>)
 
 if(WITH_ASAN)
     target_compile_options(${TEST_NAME} PRIVATE
