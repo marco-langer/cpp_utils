@@ -20,8 +20,9 @@ target_compile_options(${TEST_NAME} PRIVATE
         -Wall -Wextra -Werror -Wpedantic -Wundef -Wpointer-arith -Wno-long-long
         -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused
         -Woverloaded-virtual -Wconversion -Wsign-conversion -Wdouble-promotion
-        -Wformat=2 -Wduplicated-cond -Wduplicated-branches
-        -Wlogical-op -Wuseless-cast>
+        -Wformat=2>
+    $<$<CXX_COMPILER_ID:GNU>:
+        -Wduplicated-branches -Wduplicated-cond -Wlogical-op -Wuseless-cast>
     $<$<CXX_COMPILER_ID:MSVC>:
         /W4 /WX>)
 
