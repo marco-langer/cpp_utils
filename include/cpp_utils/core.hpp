@@ -1,5 +1,5 @@
 #ifndef CPP_UTILS_CORE_HPP_INCLUDE
-#define CPP_UTILS_CORE_HPP_INCLDUE
+#define CPP_UTILS_CORE_HPP_INCLUDE
 
 #include <cpp_utils/algorithm.hpp>
 #include <cpp_utils/concepts.hpp>
