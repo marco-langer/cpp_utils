@@ -34,4 +34,9 @@ suite strings = [] {
     expect(std::is_same_v<std::string, decltype(from_u8(std::declval<std::u8string>()))>);
     expect(std::is_same_v<std::string, decltype(from_u8(std::declval<std::u8string&>()))>);
   };
+
+  "concatenate"_test = [] {
+    const auto result = concatenate("Hello ", "World"s, ", hello again from string_view"sv);
+    expect(result == "Hello World, hello again from string_view");
+  };
 };

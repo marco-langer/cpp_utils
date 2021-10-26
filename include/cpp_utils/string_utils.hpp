@@ -31,6 +31,23 @@ view_from_u8(T && value) {
   }
 }
 
+// TODO (1) constraints for Args
+// TODO (2) replace result std::string with std::basic_string
+template <typename... Args>
+std::string
+concatenate(Args && ... args) {
+  std::size_t length{};
+  auto calc_length = [&](std::string_view el) { length += el.size(); };
+  (..., calc_length(args));
+
+  std::string result;
+  result.reserve(length);
+  auto append = [&](const auto & el) { result.append(el); };
+  (..., append(args));
+
+  return result;
+}
+
 } // namespace ml::string
 
 #endif
