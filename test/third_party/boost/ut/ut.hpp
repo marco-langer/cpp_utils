@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2020 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2019-2021 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt or copy at
@@ -12,8 +12,8 @@ export import std;
 #pragma once
 #endif
 
-#if defined(_MSC_VER)
-#include <ciso646>  // and, or, not
+#if __has_include(<ios646.h>)
+#include <iso646.h>  // and, or, not, ...
 #endif
 
 #if not defined(__cpp_rvalue_references)
@@ -71,14 +71,9 @@ export import std;
 #endif
 
 #if defined(__cpp_modules) && !defined(BOOST_UT_DISABLE_MODULE)
-export namespace boost::inline ext::ut {
-#else
-namespace boost {
-inline namespace ext {
-namespace ut {
+export
 #endif
-
-inline namespace v1_1_8 {
+namespace boost::inline ext::ut::inline v1_1_8 {
 namespace utility {
 template <class>
 class function;
@@ -240,7 +235,8 @@ template <class T>
 #if defined(_MSC_VER) and not defined(__clang__)
   return {&__FUNCSIG__[120], sizeof(__FUNCSIG__) - 128};
 #elif defined(__clang_analyzer__)
-  // clang-tidy doesn't include inline namespaces in the qualified name.
+  return {&__PRETTY_FUNCTION__[57], sizeof(__PRETTY_FUNCTION__) - 59};
+#elif defined(__clang__) and (__clang_major__ >= 12) and not defined(__APPLE__)
   return {&__PRETTY_FUNCTION__[57], sizeof(__PRETTY_FUNCTION__) - 59};
 #elif defined(__clang__)
   return {&__PRETTY_FUNCTION__[70], sizeof(__PRETTY_FUNCTION__) - 72};
@@ -2328,10 +2324,5 @@ using operators::operator not;
 using operators::operator|;
 using operators::operator/;
 using operators::operator>>;
-}  // namespace v1_1_8
-}  // namespace ut
-#if !defined(__cpp_modules) || defined(BOOST_UT_DISABLE_MODULE)
-}  // namespace inline ext
-}  // namespace boost
-#endif
+}  // namespace boost::ext::ut::v1_1_8
 #endif
