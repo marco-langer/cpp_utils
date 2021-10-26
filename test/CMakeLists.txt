@@ -47,6 +47,6 @@ target_include_directories(${TEST_NAME}
 
 target_compile_definitions(${TEST_NAME}
     PRIVATE
-        BOOST_UT_DISABLE_MODULES)
+        BOOST_UT_DISABLE_MODULE)
 
 add_test(${TEST_NAME} ${TEST_NAME})
