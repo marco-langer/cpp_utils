@@ -7,6 +7,9 @@
 
 namespace ml::string {
 
+template <typename... Ts>
+concept string_like = (... && std::is_constructible_v<std::string_view, Ts>);
+
 inline std::string
 from_u8(const std::u8string & str) {
   return std::string{str.cbegin(), str.cend()};
@@ -31,11 +34,9 @@ view_from_u8(T && value) {
   }
 }
 
-// TODO (1) constraints for Args
-// TODO (2) replace result std::string with std::basic_string
-template <typename... Args>
+template <string_like... StringLike>
 std::string
-concatenate(Args && ... args) {
+concatenate(StringLike && ... args) {
   std::size_t length{};
   auto calc_length = [&](std::string_view el) { length += el.size(); };
   (..., calc_length(args));
