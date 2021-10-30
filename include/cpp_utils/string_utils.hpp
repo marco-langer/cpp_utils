@@ -35,6 +35,7 @@ view_from_u8(T && value) {
 }
 
 template <string_like... StringLike>
+requires(sizeof...(StringLike) > 1)
 std::string
 concatenate(StringLike && ... args) {
   std::size_t length{};
