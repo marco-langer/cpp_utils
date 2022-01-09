@@ -36,7 +36,16 @@ suite strings = [] {
   };
 
   "concatenate"_test = [] {
-    const auto result = concatenate("Hello ", "World"s, ", hello again from string_view"sv);
-    expect(result == "Hello World, hello again from string_view");
+    char buffer[]{"c-style buffer"};
+    const char * lvalue_literal{", lvalue literal"};
+    const std::string lvalue_string{", lvalue string"};
+    const std::string_view lvalue_sv{", lvalue sv"};
+    const auto result{concatenate(
+      buffer,
+      lvalue_literal, ", rvalue literal",
+      lvalue_string, ", rvalue string"s,
+      lvalue_sv, ", rvalue sv"sv
+    )};
+    expect(result == "c-style buffer, lvalue literal, rvalue literal, lvalue string, rvalue string, lvalue sv, rvalue sv");
   };
 };
