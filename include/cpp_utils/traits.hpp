@@ -11,9 +11,11 @@ using disable_if = std::enable_if<!B, T>;
 template <bool B, typename T = void>
 using disable_if_t = typename disable_if<B, T>::type;
 
+// see CppCon 2017 Arthur O'Dwyer SFINAE talk
 template <bool B>
 using bool_if_t = std::enable_if_t<B, bool>;
 
+// see P1830
 template <typename... T>
 inline constexpr bool dependent_false = false;
 
@@ -39,6 +41,9 @@ inline constexpr bool is_standard_integer_v =
 template <typename T>
 inline constexpr bool is_standard_arithmetic_v =
   is_standard_integer_v<T> || std::is_floating_point_v<T>;
+
+template <typename T>
+inline constexpr bool is_void_v = std::is_same_v<T, void>;
 
 } // namespace ml
 

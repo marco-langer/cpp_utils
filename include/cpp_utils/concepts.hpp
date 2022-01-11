@@ -8,6 +8,15 @@
 
 namespace ml {
 
+template <typename T, typename... U>
+concept one_of = is_one_of_v<T, U...>;
+
+template <typename T>
+concept signed_integer = is_signed_integer_v<T>;
+
+template <typename T>
+concept unsigned_integer = is_unsigned_integer_v<T>;
+
 template <typename T>
 concept standard_integer = is_standard_integer_v<T>;
 
