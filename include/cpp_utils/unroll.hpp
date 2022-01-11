@@ -1,3 +1,6 @@
+#ifndef CPP_UTILS_FIXED_UNROLL_HPP
+#define CPP_UTILS_FIXED_UNROLL_HPP
+
 #include <concepts>
 #include <utility>
 
@@ -10,3 +13,5 @@ unroll(std::invocable auto f)
     (..., (std::forward<Func>(f)(), void(Is)));
   }(std::make_index_sequence<N>{});
 }
+
+#endif
